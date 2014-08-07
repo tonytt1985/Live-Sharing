@@ -1,0 +1,35 @@
+body {background: #ccc}
+iframe {overflow: hidden; border: 0}
+/*Widget container*/
+#noivado-widget-container { font: 400 14px 'Roboto Condensed' !important; position: absolute; border: 2px solid #fff; background: #ccc url(../images/cust-widget/bg_pattern_darkgrey.gif) repeat }
+/*Define skin*/
+/*Define font*/
+#noivado-widget-container .fs18 {font-size: 18px}
+
+#noivado-widget-container .fw600 {font-weight: 600}
+/*End define font*/
+#noivado-widget-container .hd {display: none !important;}
+
+#noivado-widget-container a img {border: none}
+/*End define skin*/
+#noivado-widget-container   {}
+#noivado-widget-container.widget-collapse  {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -moz-border-radius-topleft: 10px;
+    border-right-width: 0px !important;
+}
+
+#noivado-widget-container.widget-expand {border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px}
+
+#noivado-widget-container.widget-collapse-normal {opacity: 0.5}
+
+#collapse-widget-btn    {width: 100px;height: 45px;padding-top: 75px; background: url('../images/cust-widget/widget_logo.png') 50% 10px no-repeat; position: relative; float: left; text-align: center; line-height: 16px; text-decoration: none; text-transform: uppercase; color: #fff}
+#expand-widget-btn  {position: absolute; top: -22px; right: 0; display: none}
+#noivado-widget-content {width: 360px; display: none}
+
+.hd { display: none !important; }
+/*End widget Container*/

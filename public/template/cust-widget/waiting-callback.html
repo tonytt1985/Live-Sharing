@@ -1,0 +1,45 @@
+<div id="main-container" ng-controller="waiting">
+    <!--@Video Content-->
+    <div id="video-content">
+    </div>
+    <!--@End Video Content-->
+    <!--@Text Content-->
+    <div id="text-content">
+        <!--@Waiting Content-->
+        <div id="waiting-content">
+            <p class="c_fff fs_18">The wait will be short, we promise !<br/>
+                <a id="call-me-back-btn" href="#/wait">CALL ME BACK</a></p>
+
+            <div id="call-back-detail">
+
+                <p>Please leave your details and we'll call you back</p>
+
+                <form name="callback" novalidate>
+                    <p><label class="wp-input"><input type="text" placeholder="NAME" ng-model="cust.name" name="cName"
+                                                      required>
+                        <label ng-show="callback.cName.$error.required" class="error">*</label>
+                    </label></p>
+
+                    <p><input type="text" placeholder="PHONE" ng-model="cust.phone" name="cPhone"></p>
+
+                    <p><label class="wp-input"><input type="email" placeholder="EMAIL" ng-model="cust.email"
+                                                      name="cEmail" required>
+                        <label ng-show="callback.cEmail.$error.required" class="error">*</label>
+                        <label ng-show="callback.cEmail.$error.email" class="error">Invalid</label>
+                    </label></p>
+
+                    <p><textarea placeholder="MESSAGE" name="cMessage" ng-model="cust.msg" rows="4"></textarea></p>
+
+                    <p><a id="submit-leave-form-btn" ng-click="submitCallBackForm()"><img width="97" height="40"
+                                                                                          src="images/cust-widget/submit_btn.gif"/></a>
+                </form>
+
+                </p>
+            </div>
+            <p id="queue" class="fs_18">You're placed <span class="c_fff">#{{queueNumber}}</span> in the queue ...</p>
+        </div>
+        <!--@End waiting Content-->
+    </div>
+    <!--@End Text Content-->
+</div>
+

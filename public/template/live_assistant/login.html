@@ -1,0 +1,40 @@
+<section id="lobby-content">
+	<section class="cbox col430">	
+		<h1>Welcome to SECUDE Live Sales Center</h1>
+		<h3>Please enter your username and password</h3>			
+		<form id="admin-login" name="admin-login" action="#" class="form" method="POST">				
+			<p><label>Username</label><input id="sale_username" type="text" name="user" class="input-text" value="" placeholder="Input your username" /></p>
+			<p><label>Password</label><input id="sale_password" type="password" name="pwd" class="input-text" value="" placeholder="Input your password" /></p>
+			<p><label>&nbsp;</label><input id="la-submit" type="button" name="submit" class="button admin-login" value=""/></p>
+		</form>
+		<div class="clearThis space"></div>
+	</section>
+	<section class="cbox  col430 left-break">
+	</section>
+</section>
+<script type="text/javascript">
+	$('#la-submit').bind('click', function(){
+		var username = $('#sale_username').val();
+		var password = $('#sale_password').val();
+		var f = true;
+		if(username.length > 50 ) {
+			template_engine.displayNotification(error.className, error.maxLengthUsername);
+			f = false;
+		}
+		else if(username == '' || username.length <= 0){
+			template_engine.displayNotification(error.className, error.userCantEmpty);
+			f = false;
+		}
+		else if (!/^[a-zA-Z_][a-zA-Z0-9_]{1,50}$/.exec(username)) {
+			template_engine.displayNotification(error.className, error.userIsNotValidation);
+			f = false;
+		}
+		if(f)
+			sale.login(username, password);
+	});
+	$('#sale_username, #sale_password').keypress(function(e){
+		if(e.which == 13){
+			$('#la-submit').click();
+		}
+	});
+</script>

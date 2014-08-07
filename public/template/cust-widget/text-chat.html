@@ -1,0 +1,45 @@
+<div id="main-container" ng-controller='private'>
+    <!--@Video Content-->
+    <div id="video-content" ng-controller="videoTool">
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" id="videoVoiceChat" width="360" height="237" align="middle">
+			<param name="allowScriptAccess" value="always" />
+			<param name="allowFullScreen" value="false" />
+			<param name="movie" value="videochat_cust.swf" />
+			<param name="quality" value="high" />
+			<param name="wmode" value="opaque" />
+			<embed src="videochat_cust.swf" quality="high" wmode="opaque"  width="360" height="237" name="videoVoiceChat" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer" />
+		</object>
+    </div>
+    <!--@End Video Content-->
+    <!--@Text Content-->
+    <div id="text-content">
+        <div id="text-chat">
+            <div id="text-chat-content">
+                <div id="wp-text-chat">
+                    <div ng-repeat="chat in chatContent">
+                        <p class="chat-name {{chat.chatRole}} {{chat.showName}}">{{chat.name}}</p>
+                        <div class="wp-chat-text">
+                            <p class="chat-text fl" id="{{chat.chatId}}">{{chat.msg}}
+                                </p>
+                            <label class="chat-time fl {{chat.edit}}"><!--{{chat.chatTime}}--></label>
+                            <div class="clr"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <p id="indicator" class="{{indicator}}">{{typing}} is typing ...</p>
+                <p id="oper-connection-noti" class="{{operConnectionNoti}}">{{typing}} is disconnected.</p>
+            </div>
+            <div id="text-chat-form">
+                <form ng-submit="addChat()">
+                    <input type="text" id="text-chat-input" name="textChat" ng-model="textChat"
+                           placeholder="Type your message ..." required>
+                    <a id="text-chat-submit" ng-click="addChat()"><img src="images/cust-widget/enter_btn.png"/></a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--@End Text Content-->
+</div>
+
+

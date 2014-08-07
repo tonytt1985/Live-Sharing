@@ -1,0 +1,38 @@
+
+<div id="main-container" ng-controller="feedback">
+
+    <!--@End Video Content-->
+    <!--@Text Content-->
+    <div id="text-content">
+        <!--@Feedback form-->
+        <div id="feedback-container" >
+            <div id="cust-feedback-content">
+                <form name="feedback" novalidate >
+                <p class="fs_18 c_fff">Thanks for chatting with us!<br/>
+                    We aim to improve on your every visit.</p>
+
+                <p class="fs_18 c_45b53f">Please fill in the short survey bellow</p>
+
+                <p class="radio-container"><span class="c_fff">1) Clarity of Video and Audio<br/></span>
+                    <input name="videoAndAudio" ng-model="fb.vaa" value="1" type="radio"> Good<br/>
+                    <input name="videoAndAudio" ng-model="fb.vaa" value="2" type="radio"> Average<br/>
+                    <input name="videoAndAudio" ng-model="fb.vaa" value="3" type="radio"> Bad<br/>
+                    <input name="videoAndAudio" ng-model="fb.vaa" value="4" type="radio"> Was on text chat
+                </p>
+
+                <p class="radio-container"><span class="c_fff">2) Did you find what you were looking for ?<br/></span>
+                    <input name="lookingFor" ng-model="fb.lookingFor" value="1" type="radio"> Yes<br/>
+                    <input name="lookingFor" ng-model="fb.lookingFor" value="2" type="radio"> No
+                </p>
+
+                <p><textarea placeholder="SUGGESTION" required ng-model="fb.suggestion" rows="4"></textarea></p>
+
+                <p><a id="submit-feedback-form-btn" ng-click="sendFeedback()"><img width="97" height="40"
+                                                                  src="images/cust-widget/submit_btn.gif"/></a>
+                </form>
+            </div>
+        </div>
+        <!--@End feedback form-->
+    </div>
+    <!--@End Text Content-->
+</div>

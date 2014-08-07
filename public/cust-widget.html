@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:ng="http://angularjs.org" id="ng-app" ng-app="custApp">
+<head>
+    <title></title>
+    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,700&apos" type="text/css" rel="stylesheet"/>
+    <link href="css/cust_widget.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+    <script type="text/javascript" src="js/libs/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/libs/socket.js"></script>
+	<script type="text/javascript" src="js/libs/voice_chat.js"></script>
+    <script type="text/javascript" src="js/cust_app.js"></script>
+    <script type="text/javascript" src="js/controllers/cust/main.js"></script>
+    <script type="text/javascript" src="js/controllers/cust/video-tool.js"></script>
+
+</head>
+<body>
+    <div id="cust-container" ng-controller="main" ng-view>
+        <div id="main-container">
+            <!--@Video Content-->
+            <div id="video-content">
+                 <video width="360" height="237" controls>
+                     <source src="video/Livesales-Offline2.oggtheora.ogv" type="video/ogg">
+                 </video>
+            </div>
+            <!--@End Video Content-->
+            <!--@Text Content-->
+            <div id="text-content">
+            </div>
+            <!--@End Text Content-->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<section id="workspace">
+    <section id="queue-list">
+        <h2>Queue list</h2>
+        <div id="paging-queue"></div>
+        <div id="wrp-queue-list">
+            <ul id="queue-list-container">
+            </ul>
+        </div>
+    </section>
+    <section id="cust-info">
+        <div id="support-info" class="cbox">
+        </div>
+        <a href="#" id="data-save-button"></a>
+        <div id="customer-info" class="cbox left-break">
+        </div>
+    </section>
+    <script type="text/javascript">
+        sale.validateEmail = function(email){
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if(email == ''){
+                template_engine.displayNotification(error.className, textDisplay.cantSendEmail);
+                return false;
+            }
+            if(!emailReg.test(email)){
+                template_engine.displayNotification(error.className, textDisplay.cantSendEmail2);
+                return false;
+            }
+            return true;
+        };
+        $('#data-save-button').bind('click', function(){
+            if(sale.cusId !== ''){
+                sale.custInfo.updateBasicInfo();
+                //Remove support information
+                //sale.custInfo.updateSupportInfo();
+                sale.saveSession();
+                //Loc comment, no need to validate mail when saving
+                /*if(sale.validateEmail(sale.custInfo.getBasicInfo().email))
+                 sale.saveSession();
+                 else{
+                 sale.custInfo.updateBasicValue('email', '');
+                 sale.saveSession();
+                 }*/
+            }
+            else{
+                template_engine.displayNotification(error.className, error.cannotSaveTicket);
+            }
+        });
+        var displayEngage = true;
+
+        // display list cust function
+        /*var displayEngage = true;
+        sale.displayCustList = function(listCust){
+            $('#listCust').replaceWith('');
+            if(sale.listCust !== null){
+                var listCustStr = '<table id="listCust" cellspacing="0" cellpadding="0" border="0" width="100%">';
+                // dispaly table header
+                listCustStr += '<tr class="tablehead">';
+                listCustStr += '<th class="col5 tac"> #</th>';
+                listCustStr += '<th class="col15">Duration</th>';
+                listCustStr += '<th class="col30">Name</th>';
+                listCustStr += '<th class="col20">Country</th>';
+                listCustStr += '<th class="col30">Status</th>';
+                listCustStr += '</tr>';
+                listCustStr += '<tbody id="listCustBody">';
+                // display table content
+                for (var i = 0; i < listCust.length; i++) {
+                    listCustStr += '<tr>';
+                    listCustStr += '<td class="tac">'+ (i+1) +'</td>';
+                    // calculate time waiting
+                    var mn = Math.floor(parseInt(new Date().getTime()) - parseInt(listCust[i].status) - (sale.timegap));
+                    if(mn < 60000){
+                        listCustStr += '<td> Just now </td>';
+                    }
+                    else if(mn < (2*60000)){
+                        listCustStr += '<td>'+ Math.floor(mn/60000)  + ' min</td>';
+                    }
+                    else{
+                        listCustStr += '<td>'+ Math.floor(mn/60000)  + ' mins</td>';
+                    }
+                    listCustStr += '<td>'+ listCust[i].name +'</td>';
+                    listCustStr += '<td>'+ listCust[i].country +'</td>';
+                    if(displayEngage==true){
+                        listCustStr += '<td><input class="engage-button" type="button" value="ENGAGE" id="btnEngage'+ i +'"/></td>';
+                    }
+                    else{
+                        listCustStr += '<td><input class="engage-button hd" type="button" value="ENGAGE" id="btnEngage'+ i +'"/></td>';
+                    }
+                    listCustStr += '</tr>';
+                }
+                listCustStr += '<tbody>';
+                listCustStr += '</table>';
+                $('#queue-list').append(listCustStr);
+                // bind click event to button
+                var data = [];
+                for (var j = 0; j < listCust.length; j++) {
+                    data['btnEngage'+j] = {custId:listCust[j].id, saleId:sale.id};
+                    $('#btnEngage'+j).bind('click', function() {
+                        socketEmit('engage', data[$(this).attr("id")]);
+                    });
+                }
+            }
+        }
+        sale.displayCustList(sale.listCust);
+
+        setInterval(function(){
+            sale.displayCustList(sale.listCust);
+        },60000);   */
+    </script>
+</section>

@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* Imports
+----------------------------------------*/
+@import url("reset.css");
+@import url("la_global.css");
+/* Basic Elements
+----------------------------------------*/
+html, body	{width:100%; height:100%}
+body, p, td, th	{font:400 14px 'Roboto Condensed',Arial, Helvetica, sans-serif; color:#333; margin:0 0 10px; padding:0}
+body			{background: #eee url(../images/bg_diagonal.gif) repeat}
+body img {border:none; vertical-align:middle}
+button, input, textarea	{font:14px 'Roboto Condensed',Arial, Helvetica, sans-serif; color:#aaa}
+input:focus, textarea:focus	{color:#333}
+/*--- Common Styles ---*/
+a:link, a:visited	{color:#0D74B6; text-decoration:none}
+a:hover, a:active	{color:#ed1c24}
+a:focus				{outline:none}
+h1, h2, h3, h4, h5, h6	{margin:0 0 .5em; line-height:1.5em; font-weight:bold}
+h1 	{font-size:24px}
+h2 	{font-size:20px; text-transform:uppercase}
+h3 	{font-size:17px}
+h4 	{font-size:14px}
+h5 	{font-size:12px}
+h6 	{font-size:10px}
+ul, ol 		{margin:0 0 1em 1em; list-style-type:disc}
+blockquote	{margin: 0 0 18px 18px; color:#666; font-style: italic}
+strong		{font-weight:bold}
+em		{font-style:italic}
+
+/* Standard Definitions */
+.fl 		{float:left;}
+.fr 		{float:right;}
+.clearThis, p	{clear:both}
+.small{font-size:.625em;}
+.large{font-size:1em;}
+.soft	{color:#D3D3D3;}
+.hide	{display:none;}
+p.last{margin-bottom:0px;}
+.rtb	{text-align:justify}
+.rtc		{text-align:center}	
+.space	{padding-bottom:1em}
+.hr-line {background:url(../images/bg_breakline_hr.gif) repeat-x; width:100%; height:2px}
+
+/*Skin define*/
+/*----------------------------/*
+/* Layout Components
+----------------------------------------*/
+#container	{position:absolute; width:1080px; left:50%; top:0; margin:0 auto 0 -540px}
+#content, #lobby-content 	{position:relative; padding:20px; display: inline-block;-moz-box-shadow: 0 0 5px #999; -webkit-box-shadow: 0 0 5px #999; box-shadow: 0 0 5px #999}
+#CUST #content, #CUST #lobby-content {top: 100px; background:#fff; border:10px solid #666; width: 1020px}
+#LO #content, #LO #lobby-content {background:#fff; border:10px solid #666; width: 1020px}
+#login-content {background:#fff; position:absolute; width:540px; padding:30px 20px;top: 100px; left : 50%; margin-left: -270px; text-align: center; border:10px solid #666; text-align:center;-moz-box-shadow: 0 0 5px #999; -webkit-box-shadow: 0 0 5px #999; box-shadow: 0 0 5px #999}
+#header	{padding:20px 0px 20px 20px; position:relative}
+#footer	{position:absolute;width: 960px; top: 100%; left: 0; margin-top: .5em}
+#footer p {color: #000}
+#communication-setting {background:#eee; position:absolute; top:0; left:0; width:900px; padding:15px; border:5px solid #666; -moz-border-radius: 10px; border-radius: 10px; z-index: 5}
+#communication-setting img {display:inline; float: left; margin-right:10px}
+#communication-setting p {clear:none}
+#communication 	{}
+
+#videoChatContainer {position:absolute;top:21px;left:20px;z-index:9999;width:240px;height:210px;}
+/* -- Column define -- */
+.colp33	{width:33%}
+.colp50	{width:50%}
+.col240	{width:240px}
+.col360 {width:360px}
+.col430 {width:430px}
+.col620 {width:620px}
+
+
+/* -- Navigation -- */
+
+
+#content-list {padding:0 5px}
+#content-list a {padding:0 5px; width:70px}
+#content-list a p {font-size:11px; text-transform:uppercase; text-align:center}
+#content-page	{position:absolute; left:10px; bottom:0}
+#content-page h5	{margin:0; line-height:20px}
+#content-page a:link,#content-page a:visited {padding:0 5px; font-size:12px}
+#content-page a.active	{color:#f30; font-weight:700}
+/* -- Row content styles --*/
+#voicechat, #textchat {cursor:pointer}
+.rowbox {float:left; color:#666; font-size:12px; padding:5px 15px 5px 5px}
+.rowbox img	{display:inline; float: left; margin-right:10px}
+.selected	{background:#dfdfdf; border-right:8px solid #028482}
+.text-note {font-weight:700; color:#005502}
+/* -- Customer info -- */
+#cust-info, #queue-list	{background: #eee !important; border: 1px solid #ddd}
+#cust-info {padding: 40px 0px}
+#cust-info h3	{text-transform:uppercase; color:#777; margin:5px 10px; border-bottom:2px solid #777; margin: 5px 0 10px 10px}
+#cust-info .label, #cust-info .value,#cust-info .label-full	{display:inline; float:left; height:20px; margin-bottom:5px;font-size:13px;}
+#cust-info .label	{width:100px; margin-left:10px; font-weight:700; padding-top:1px}
+#cust-info .label-full {margin-left:10px; font-weight:700; padding-top:1px}
+.cust-info-input{font-family: 'Roboto Condensed' !important;color:#888; border:0; border-bottom:1px dotted #ccc; background: #eee}
+#cust-info h2, #queue-list h2 {position: absolute; top: 2px; left: 10px; color: #ccc; font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif}
+/* -- Form styles -- */
+.form label	{float:left; display:inline; font-size:14px; font-weight:700; line-height:40px; text-transform:uppercase; width:100px}
+.form p	{float:left; margin-bottom:5px; clear: none; width: 100%}
+.form .clearThis	{margin-bottom:5px}
+.input-textarea, .input-textarea-small,
+.input-text,.input-text-cust	{display:inline; font-size:18px; font-weight:700; padding:0 3px;  background:#f3f3f8; border:1px solid #c8c8cf; height:38px; margin-left:.5px}
+.input-text {float:left}
+.input-textarea {font-size:14px; font-weight:400; width:25em; height:10em; border-width:2px}
+.input-textarea-ticket	{font-size:14px; font-weight:400; width:18em; height:8em; margin-left:10px}
+.selector {width: 12em}
+#CUST .selector	{width:230px; font-size: 14px; font-weight: 700; height: 38px; background:#f3f3f8; border:1px solid #c8c8cf}
+.button,.button-cust	{display:inline; height:40px; border:0; cursor:pointer; vertical-align: top}
+.button {float:left}
+.text-button {padding: 5px; border: 1px solid #bbb; background: #efefe8; color: #878786 !important; text-decoration: none; font-size: 14px}
+/*.cust-start	{background:url(../images/btn_start.gif) no-repeat; width:80px}*/
+.admin-login	{background:url(../images/btn_login.gif) no-repeat; width:80px}
+.feedback-submit	{background:url(../images/btn_submit.gif) no-repeat; width:91px}
+#content-leave-msg {float:left; display:inline; font-size:18px; font-weight:700; padding:0 3px;  background:#f3f3f8; border:1px solid #c8c8cf; margin-left:.5px}
+
+/* -- System log styles --*/
+#syslog	{position:relative; padding:0; width: 620px; font-size:12px; color:#444; z-index: 10}
+#loading-bar	{height:20px; margin: 3px 0 0 0}
+#wrap-syslog {position:absolute; padding: 5px 10px; top: 100%; border: 1px solid #fff; z-index: 2; background: #efefef}
+#wrap-syslog a {text-decoration: underline}
+#syslog .log-name	{color:#0D74B6; font-weight:700}
+#syslog .log-timing	{margin-left:10px; font-size:10px; color:#888; text-transform:uppercase}
+/*#syslog .sys-icon-processing	{background:url(../images/icon_processing.gif) no-repeat; width:14px; height:14px}
+*/
+#sys-loading	{color:#397832; font-weight:700}
+/* -- share content --*/
+#product-share {position: relative}
+
+/* -- Feedback & Form styles --*/
+#feedback	{padding:10px}
+#feedback h4	{margin-right:1em}
+/* -- Button styles -- */
+#log-button	{margin-right: 10px; width: 17px; height: 17px;background:#aaa;padding:2px;color:#fff;}
+#log-button img {vertical-align: top !important}
+#logsave-button	{position:absolute; bottom:5px; right:5px; height:16px}
+.log-full	{background:url(../images/btn_log_full.gif) no-repeat; width:47px}
+.log-full:hover	{background:url(../images/btn_log_full_hover.gif) no-repeat}
+.log-close	{background:url(../images/btn_log_close.gif) no-repeat; width:40px}
+.log-close:hover	{background:url(../images/btn_log_close_hover.gif) no-repeat}
+.log-save	{background:url(../images/btn_log_save.gif) no-repeat; width:54px}
+.log-save:hover	{background:url(../images/btn_log_save_hover.gif) no-repeat}
+#data-save-button	{background:url(../images/btn_save.png) no-repeat; position:absolute; bottom:10px; left:10px; width:90px; height:25px}
+#data-save-button:hover	{background:url(../images/btn_save.png) no-repeat}
+#confirmation-button	{background:url(../images/btn_confirmation.gif) no-repeat; position:absolute; top:5px; left:10px; width:110px; height:20px}
+#confirmation-button:hover	{background:url(../images/btn_confirmation_hover.gif) no-repeat}
+/* -- Unused styles -- */
+table#codelist	{border:1px solid #ccc}
+table#codelist tr, 
+table#codelist th,
+table#codelist td	{border:1px dotted #ccc; padding:3px 5px}
+table#codelist th	{background:#ddd; font-weight:bold}
+
+#list-type {margin-bottom:5px}
+#list-type a:link,#list-type a:visited	{float:left; display:inline; padding:1px 5px; margin-right:5px; background:#eee}
+#list-type a:hover,#list-type a:active {background:#0D74B6; color:#fff; text-decoration:none}

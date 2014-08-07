@@ -1,0 +1,37 @@
+<section id="content">			
+	<section id="communication-area" class="cbox col360">
+	</section>
+	<section id="sharing-content-area" class="cbox col620 left-break">	
+		<nav id="main-nav">
+            <div class="bg-main-nav-right">
+                <a id="link-ready" class="end-session hd" href="#"></a>
+
+                <div id="wrap-main-nav" class="fr">
+                    <a id="link-cust_logged" class="main-link" href="#">HELP</a>
+                    <!--<span class="v-breakline"></span>-->
+                </div>
+                <div class="clearThis"></div>
+            </div>
+		</nav>
+		<div class="clearThis"></div>
+	</section>
+</section>
+<script type="text/javascript">
+	$('#link-cust_logged').click(function(){
+		$('.main-link').removeClass('active');
+		$(this).addClass('active');
+		$('#workspace').toggle();
+		$('#help-guide').toggle();
+	});
+	$('#link-ready').bind('click', function(){
+        if (sale.cusId !== '') {
+            sale.send(JSON.stringify({custId: sale.customer_id}), 'endSession');
+            template_engine.tmpls['content'].updateHtmlSource({'switch': '+hd'});
+			clearInterval(sale.timeoutEndSession);
+			if(typeof sale.waitEndSession != 'undefined')
+				sale.waitEndSession.remove();
+			template_engine.hiddenNotificationLoading();
+        }
+    });
+	$('#link-logout').bind('click', function(){global_config.reconnect = -2;sale.logout();});
+</script>

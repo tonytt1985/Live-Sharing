@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="google-site-verification" content="3uy94xlX0K0LOHRpB753CrCC_FzBe1h6M6Uk_CEKmHY" />
+<meta name="generator" content="Version 1.1.17-beta">
+<title>SECUDE Live Sales</title>
+<!--[if IE]>
+	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link href="css/global.css" type="text/css" rel="stylesheet" media="all"/>
+<link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,700&apos" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+
+<body id="LO">
+<section id="container">	
+</section>
+<div id="display-loading">
+	<div id="content-loading">
+		<figure><img src="images/logo_secude_small.png"/></figure>
+		<figure><img width="83" height="10" src="images/noivado_loading.gif"/></figure>
+		<p id="loading-text" class="hd"><span id="loading-process-text" class="f12"></span><span id="loading-process" class="f12"></span></p>
+		<p id="error-loading" class="fc_f00"></p>
+	</div>
+</div>
+<!-- Google Analytic Script -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36271888-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+//Define a ajax loading function by javascript.
+	function loadByAjax(url, callback){
+		var xmlhttp;
+		//code for IE7+, Firefox, Chrome, Opera, Safari
+		try {
+			xmlhttp = new XMLHttpRequest();
+		}
+		catch(err){
+			//Code for ie5, ie6
+			try{
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+			}
+			catch(e){
+				try{
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch(_e){
+				}
+			}
+		}
+		if(!xmlhttp)
+			alert('Cannot create xmlhttp object');
+		xmlhttp.onreadystatechange = function(){
+			if(xmlhttp.readyState == 4){
+				if(xmlhttp.status == 200 || xmlhttp.status == 304){
+					callback(xmlhttp.responseText);
+				}
+			}
+		};
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send(null);
+	}
+	
+	//Cannot load jQuery lib from googleapis, reload jQuery lib from other CDN
+	
+	//Load config file after have loaded jQUery lib
+
+	var listJs = [];
+	var init_CDN = ['','https://livesales.noivado.org/public/'];
+	var init_paths = ['js/libs/jquery.min.js', 'js/config.js'];//, 'js/customer/start.js'
+	function initjQueryLib(index_CDN){
+		if(index_CDN < init_CDN.length){
+			var url = init_CDN[1] + init_paths[0];
+			loadByAjax(url, function(resp){
+				var head = document.getElementsByTagName("head")[0];
+				var fl = document.createElement('script');
+				fl.setAttribute("type","text/javascript");
+				fl.text = resp;
+				head.appendChild(fl);
+				if(typeof($)=== 'function' || typeof(jQuery)=== 'function')
+					initJsLib(0,1);
+			});
+		}
+	}
+	function initJsLib (index_CDN, index_paths){
+		if(index_paths < init_paths.length){
+			if(index_CDN < init_CDN.length){
+				var url = init_CDN[index_CDN] + init_paths[index_paths];
+				$.ajax({
+					url: url,
+					dataType: "script",
+					timeout: 10000,
+					error: function(){
+						index_CDN++;
+						initJsLib(index_CDN, index_paths);
+					},
+					success: function(data){
+						//fix ie
+						if(data == undefined)
+						{
+							index_CDN++;
+							initJsLib(index_CDN, index_paths);
+						}
+						else{
+							loadJs(listLaLibJs, 0, 0, -1, null);
+							loading.displayLoading();
+							loading.updateLoading("Load js library : ", 0, 0);
+						}
+					}
+				});
+			}
+			else
+				alert("cannot load config file");
+		}
+		
+	};
+	if(typeof($)=== 'function' || typeof(jQuery)=== 'function')
+		initJsLib(0,1);
+	else
+		initjQueryLib(0);
+</script>
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" id="blankFlash" width="1" height="1" align="middle">
+			<param name="allowScriptAccess" value="always" />
+			<param name="allowFullScreen" value="false" />
+			<param name="movie" value="blank.swf" />
+			<param name="quality" value="high" />
+			<param name="wmode" value="transparent" />
+			<embed src="blank.swf" quality="high" wmode="transparent"  width="1" height="1" name="blankFlash" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer" />
+</object>
+</body>
+</html>

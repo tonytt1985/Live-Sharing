@@ -1,0 +1,17 @@
+<div id="top-nav" class="col450 fr">
+    <div class="cbox col450">
+        <a id="link-logout" class="main-link fr" href="#">Sign Out</a>
+        <span id="session-text" class="fr"></span>
+    </div>
+    <div class="cbox col450">
+        <span id="cust-time" class="main-link fr hd">
+            <span id="cust-name"></span><span id="cust-time-display"></span>
+        </span>
+    </div>
+
+
+</div>
+<script type="text/javascript">
+	$('#link-logout').bind('click', function(){global_config.reconnect = -2;sale.logout();});
+	
+</script>

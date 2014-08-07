@@ -1,0 +1,176 @@
+<div id="communication" class="main-row col360">
+	<section id="ls-videochat" class="h237">
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" id="videoVoiceChat" width="360" height="237" align="middle">
+			<param name="allowScriptAccess" value="always" />
+			<param name="allowFullScreen" value="false" />
+			<param name="movie" value="videochat_oper.swf" />
+			<param name="quality" value="high" />
+			<param name="wmode" value="opaque" />
+			<embed src="videochat_oper.swf" quality="high" wmode="opaque"  width="360" height="237" name="videoVoiceChat" align="middle" allowScriptAccess="always" allowFullScreen="false" type="application/x-shockwave-flash" pluginspage="https://www.macromedia.com/go/getflashplayer" />
+		</object>
+	</section>
+	<section id="ls-chatbox">
+		<div id="text-chat-content" class="h210">
+			<div id="indicator" class="wp-text-chat hd"><p class="ct-chat f10 fi"><span class="indicator-name fb"></span><span class="dot-loading"></span></p></div>
+		</div>
+		<div id="chat-form" class="bg_input_text">
+            <input class="la_input_text bg_input_text pl5 input-noti" id="chat-text" type="text"
+                   value="Type your message.">
+			<button id="submit-chat" class="btn fr" type="button"></button>
+			<div class="clr"></div>
+		</div>
+	</section>
+</section>
+<script type="text/javascript">
+	$(".dot-loading").loadingDot({
+		"speed": 400,
+		word: " is typing "
+	});
+	sale.indicatorContent = $('#text-chat-content').html();
+	sale.indicator = $('#indicator');
+	sale.initIndicator = function(name){
+		sale.indicator.find('.indicator-name').text(name);
+	};
+	sale.resetIndicator = function(){
+		sale.indicator = $('#text-chat-content').find('#indicator');
+		sale.indicator.find(".dot-loading").loadingDot({
+			"speed": 400,
+			word: " is typing "
+		});
+	}
+	sale.showIndicator = function(flag){
+		if(flag)
+			sale.indicator.removeClass('hd');
+		else
+			sale.indicator.addClass('hd');
+	};
+	$('#collapse').bind('click', function(){
+		if($('#ls-chatbox, #chat-form').hasClass('hd')){
+			$('#ls-chatbox, #chat-form').removeClass('hd');
+			$(this).find('span').removeClass('icon-expand').addClass('icon-collapse');
+		}
+		else{
+			$('#ls-chatbox, #chat-form').addClass('hd');
+			$(this).find('span').removeClass('icon-collapse').addClass('icon-expand');
+		}
+	});
+	$('#chat-text').focus(function(){
+		if($(this).hasClass('input-noti')){
+			$(this).val('');
+			$(this).removeClass('input-noti');
+		}
+	});
+	$('#chat-text').focusout(function(){
+		if($(this).val() == ''){
+			$(this).val(textInput.inputChatText);
+			$(this).addClass('input-noti');
+			sale.send("", 'chatFocusOut');
+			sale.flagIndicator = false;
+		}
+	});
+	sale.flagIndicator = false;
+	$('#chat-text').focus();
+	$('#chat-text').keypress(function(e){
+		if(e.which == 13){
+			$('#submit-chat').click();
+			sale.editChat.keyUp = true;
+		}
+		else if(!sale.flagIndicator && sale.cusId !== ''){
+			sale.send("", 'chatFocus');
+			sale.flagIndicator = true;
+		}
+	});
+	$('#chat-text').keyup(function(e){
+		if(e.keyCode == 8 && $('#chat-text').val() === ''){
+			sale.send("", 'chatFocusOut');
+			sale.flagIndicator = false;
+		}
+		if(e.keyCode == 38 && sale.editChat.keyUp){
+			sale.editChat.btn.click();
+			sale.editChat.keyUp = false;
+		}
+	});
+	$('#submit-chat').bind('click', function(){
+		if(!sale.editChat.flag){
+			if($('#chat-text').val().length > 0 && !$('#chat-text').hasClass('input-noti')){
+				sale.addChat(sale.nickName, typeUser.sale, $('#chat-text').val(), new Date().getTime());
+				global_config.scrollDown('#text-chat-content');
+				sale.send($('#chat-text').val(), 'msg');
+				//sale.send("", 'chatFocusOut');
+				sale.flagIndicator = false;
+				$('#chat-text').val('');
+			}
+		}else{
+			if($('#chat-text').val().length > 0 && !$('#chat-text').hasClass('input-noti')){
+				sale.editChat.selfEditContent(sale.formatText($('#chat-text').val()));
+				sale.send(JSON.stringify({text: sale.formatText($('#chat-text').val()), id: sale.editChat.idContent}), 'editMsg');
+				$('#chat-text').val('');
+				$('#chat-text').focus();
+			}
+		}
+        $('#chat-text').focus();
+        sale.send("", 'chatFocus');
+	});
+	sale.formatText = function(text){
+		var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+		return text.replace(urlRegex, function(url){
+			return '<a href="' + url + '" target="_blank">' + url + '</a>';
+		});
+	};
+	/*
+		Still dont save log chat, so sale.logChat parameter only store last user's last info + textchat.
+	*/
+	sale.addChat = function(nick, role, textchat, timestamp){
+		textchat = sale.formatText(textchat);
+		if(nick !== sale.nick && role !== typeUser.sale && role !== typeUser.mod && role !== typeUser.admin)
+			role = typeUser.otherCust;
+		if(nick !== '' && (role === typeUser.sale || role === typeUser.otherCust))
+			sale.countChat++;
+		var chatId = sale.countChat + nick.replace(/\s/g, "");
+		if(sale.logChat.length == 0){
+			sale.logChat.push({id: chatId, name: nick, role: role, textChat: textchat, wrpChat: chatId+ '-wrp'});
+			var d = $('<div id="'+ chatId +'-wrp" class="wp-text-chat"></div>');
+			if(role === typeUser.sale){
+				d.append('<h4 class="tt-chat chat-send">'+nick+'</h4>').append('<p id="'+ chatId +'" class="ct-chat">'+textchat+'</p>');
+				sale.editChat.moveBtnTo(chatId);
+			}
+			else if(role === typeUser.admin)
+				d.append($('<p id="'+ chatId +'" class="ct-chat sys-ct-chat"></p>').append('<span class="tt-chat chat-sys">'+nick+'</span>' + textchat));
+			else
+				d.append('<h4 class="tt-chat chat-receive">'+nick+'</h4>').append('<p id="'+ chatId +'" class="ct-chat">'+textchat+'</p>');
+			//$('#text-chat-content').append(d);
+			sale.indicator.before(d);
+		}else{
+			var lastUser = sale.logChat.pop();
+			if(nick === lastUser.name && role === lastUser.role){
+				if(lastUser.role === typeUser.admin){
+					var d = $('<div id="'+ chatId+'-wrp" class="wp-text-chat"></div>');
+					d.append($('<p id="'+chatId+'" class="ct-chat sys-ct-chat"></p>').append('<span class="tt-chat chat-sys">'+nick+'</span>' + textchat));
+					//$('#text-chat-content').append(d);
+					sale.indicator.before(d);
+				}
+				else{
+					$('#' + lastUser.wrpChat).append('<p id="'+chatId+'" class="ct-chat">'+textchat+'</p>');
+					if(role === typeUser.sale)
+						sale.editChat.moveBtnTo(chatId);
+				}
+				sale.logChat.push({id: chatId, name: lastUser.name, role:lastUser.role,  textChat: textchat, wrpChat: lastUser.wrpChat});
+			}
+			else{
+				var d = $('<div id="'+ chatId+'-wrp" class="wp-text-chat"></div>');
+				if(role === typeUser.sale)
+					d.append('<h4 class="tt-chat chat-send">'+nick+'</h4>').append('<p id="'+chatId+'" class="ct-chat">'+textchat+'</p>');
+				else if(role === typeUser.admin)
+					d.append($('<p id="'+chatId+'" class="ct-chat sys-ct-chat"></p>').append('<span class="tt-chat chat-sys">'+nick+'</span>' + textchat));
+				else
+					d.append('<h4 class="tt-chat chat-receive">'+nick+'</h4>').append('<p id="'+chatId+'" class="ct-chat">'+textchat+'</p>');
+				//$('#text-chat-content').append(d);
+				sale.indicator.before(d);
+				sale.logChat.push({id: chatId, name: nick, role: role, textChat: textchat, wrpChat: chatId+ '-wrp'});
+				if(role === typeUser.sale)
+					sale.editChat.moveBtnTo(chatId);
+			}
+			
+		}
+	};
+</script>
